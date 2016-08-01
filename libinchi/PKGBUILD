@@ -1,0 +1,26 @@
+# Maintainer: Matt Sprague <mesprague@gmail.com>
+
+pkgname=libinchi
+pkgver=1.04
+pkgrel=1
+pkgdesc="The official IUPAC InChI library"
+arch=('i686' 'x86_64')
+url="http://www.inchi-trust.org"
+license=('GPL')
+source=("http://www.inchi-trust.org/download/${pkgver/./}/INCHI-1-API.zip")
+md5sums=()
+
+prepare() {
+  mkdir -p build
+  cd $pkgname-$pkgver
+}
+
+build() {
+  cd build
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
